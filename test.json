@@ -1,0 +1,91 @@
+{
+  "toolsHandlingExperience": {
+    "TotalScore": 10,
+    "ObtainedScore": 0,
+    "Detail": {
+      "ComplianceSet": [],
+      "NonComplianceSet": [
+        "javascript",
+        "python"
+      ]
+    }
+  },
+  "Location": {
+    "TotalScore": 2,
+    "ObtainedScore": 0,
+    "Detail": {
+      "ComplianceSet": [],
+      "NonComplianceSet": [
+        "pakistan",
+        "islamabad"
+      ]
+    }
+  },
+  "Experience": {
+    "TotalScore": 10,
+    "ObtainedScore": 1,
+    "Detail": {
+      "Required": "24 months",
+      "Acquired": "23 months"
+    }
+  },
+  "Qualification": {
+    "TotalScore": 14,
+    "ObtainedScore": 13,
+    "Detail": {
+      "ComplianceSet": [
+        "m",
+        "c",
+        "i",
+        "s",
+        "p",
+        "t",
+        "l",
+        "o",
+        "n",
+        "y",
+        "a",
+        "r",
+        "e"
+      ],
+      "NonComplianceSet": [
+        "k"
+      ]
+    }
+  },
+  "Misc": {
+    "TotalScore": 22,
+    "ObtainedScore": 0,
+    "Detail": {
+      "ComplianceSet": [],
+      "NonComplianceSet": [
+        "restful",
+        "modern",
+        "node",
+        "react",
+        "js",
+        "development",
+        "architecture",
+        "css",
+        "projects",
+        "javascript",
+        "stack",
+        "apis",
+        "apisnode",
+        "frontend",
+        "side",
+        "python",
+        "latest",
+        "database",
+        "developer",
+        "web",
+        "system",
+        "backend"
+      ]
+    }
+  },
+  "uniqueIdentifier": "ef6c8c75-e886-476c-9ff8-e8035c69d5e6",
+  "GrandTotalScore": 58,
+  "GrandObtainedScore": 14,
+  "Score(%)": 24.137931034482758
+}
