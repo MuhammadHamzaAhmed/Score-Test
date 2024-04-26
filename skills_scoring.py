@@ -51,9 +51,10 @@ def hybrid_skill_score_calculation(applicant_data, job_data):
     for experience in applicant_data['working_experience']:
         total_experience = total_experience + ','.join(experience['responsibilities'])
 
-    # total_experience = nlp(total_experience)
-    # nlp_match_score = calculate_nlp_match_score(total_experience, job_skills)
-    score = compare_skills_result['obtained_score'] * 60 / compare_skills_result['total_score']
-    score += job_skill_score['obtained_score'] * 40 / job_skill_score['total_score']
-    # score += nlp_match_score['obtained_score'] * 20 / nlp_match_score['total_score']
+    total_experience = nlp(total_experience)
+    nlp_match_score = calculate_nlp_match_score(total_experience, job_skills)
+
+    score = compare_skills_result['obtained_score'] * 80 / compare_skills_result['total_score']
+    score += job_skill_score['obtained_score'] * 15 / job_skill_score['total_score']
+    score += nlp_match_score['obtained_score'] * 5 / nlp_match_score['total_score']
     return score * 40 / 100

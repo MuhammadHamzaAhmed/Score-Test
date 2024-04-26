@@ -6,7 +6,7 @@ class Claude:
 
     def __init__(self, resume=""):
         self.anthropic = Anthropic(
-            api_key="api-key-here")
+            api_key="")
         self.prompt = (f"""I want you to parse my cv and give result in <p> tag your output should be"""
                        """<p>
                {

@@ -76,38 +76,28 @@ def compare_experience(application_experience, jd_experience, title, jd, skills)
     claude = Claude()
     parser = Parser()
     prompt = f"""
-    I need a {title} list all company names that are suitable for this job. You will ignore all company that is irrelevant. You need consider exact match like testing experience can't be used for development experience. It is not necessary to list any if all are irrelevant.
-    Here is job description to get idea what is required: {jd}
-    Here are required skills {skills}
-    Here are all companies {application_experience}
-    you should output with <p>["###", "###"]</p> if any, else <p>[]</p>
+I need a {title} to list all company names that are suitable for this job. You will disregard all companies that are irrelevant. Please ensure that exact matches are considered; for instance, testing experience cannot be equated with development experience. If all companies are irrelevant, there's no need to list any.
+Here's the job description to give you an idea of what is required: {jd}.
+Below are the required skills: {skills}.
+And here are all the companies: {application_experience}.
+You should output with <p>["###", "###"]</p> if any are suitable, else <p>[]</p>.
+
+Constraints: You should include only those companies that have following skills {skills}.
     """
     text = claude.predict_text(prompt)
     companies = json.loads(parser.get_tags(text)[0])
     experience = 0
     for applicant in application_experience:
         if applicant.get("company", "") in companies:
-            print("Here")
             duration = applicant.get("duration", {})
             experience += duration.get("month", 0) + duration.get("year", 0) * 12
-    print(experience)
-    print(jd_experience)
     return min(40, experience * 40 / jd_experience)
-
-
-def display_required(applicant_data, job_data):
-    print("======================Started========================")
-    print("======================Applicant======================")
-    pprint(applicant_data)
-    print("======================JD=============================")
-    pprint(job_data)
 
 
 def get_scores(job_id, applicant_id):
     job_data = send_get_request(f"https://dev-api.3cix.com/api/external/job-description/job-by-id/{job_id}")
-    print("-----------------RAW JOB DESCRIPTION----------------------")
+    # print("-----------------RAW JOB DESCRIPTION----------------------")
     applicant_data = get_resumes(applicant_id)
-    display_required(applicant_data, job_data)
     skill_score = hybrid_skill_score_calculation(applicant_data, job_data)  # 40 %
 
     education = ", ".join([edu.get("degree", "") for edu in applicant_data.get("json_education", [])])
@@ -136,7 +126,8 @@ def get_scores(job_id, applicant_id):
 # 'bc9f9a4c-2286-4ee6-a7f3-16b0c88c98f9', 'cb49741b-afe5-40d0-99f7-8814c58a5aa0',
 # 'fdfaf9e1-4864-4000-a5f8-b69d35843a21']
 if __name__ == "__main__":
-    applicant_ids = ['22c44cca-8075-4cdf-8c69-12030efb0c18']
+    applicant_ids = ['b9c83433-0400-47cd-85a2-646630a52ebd', "7e97c216-b658-4dce-a0cb-09184e8c355a",
+                     "22c44cca-8075-4cdf-8c69-12030efb0c18"]
     for applicant_id in applicant_ids:
-        score = get_scores("66de2fa5-4d36-45e2-9649-7237872d9f01", applicant_id)
+        score = get_scores("917f9b5d-967a-49e8-9f18-199bbdb75631", applicant_id)
         pprint(score)
