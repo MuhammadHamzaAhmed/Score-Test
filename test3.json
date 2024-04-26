@@ -1,0 +1,154 @@
+You will help me extract information in need. you will provide json output in end according to required format. Here is the job description.
+Copy code{
+  "nationalityPreference": [],
+  "location": "Pakistan",
+  "city": [
+    "Islamabad"
+  ],
+  "jobTitle": "Business Developer Manager",
+  "experience": "6 years",
+  "skills_required": "Sales,Business Development,Relationship Management,Market Research,Strategic Planning,Negotiation,Lead Generation,CRM,Presentation Skills,Financial Analysis",
+  "qualification": "Bachelor of Software Engineering",
+  "detailedJobDescription": "We are looking for a results-driven Business Development Manager to lead our growth initiatives. The ideal candidate should have a proven track record of developing and implementing strategic business plans to drive revenue and expand market reach. Strong networking skills, the ability to build and maintain relationships with key stakeholders, and a knack for identifying new business opportunities are essential. Experience in negotiating and closing deals, as well as a deep understanding of market trends and customer needs, are critical for success in this role. The candidate should demonstrate excellent communication and presentation skills, as well as the ability to lead and motivate a team of business development specialists. A data-driven approach to decision-making, coupled with strong analytical skills to evaluate business performance and ROI, is important. A customer-centric mindset and a passion for driving business growth through innovation and collaboration are key success factors. Previous experience in a similar role, combined with a track record of achieving sales targets and driving business growth, will be highly valued.",
+  "companyDescription": "SYMCLOUD is established by young professional IT entrepreneurs in collaboration with experienced professionals having exposure to the service industry for more than two decades. Our target is to extend the benefits of the IT explosion to Small & Medium Businesses like large organizations that are already enjoying it. The evolution of Artificial Intelligence in modern communication technologies has enhanced natural means of propagating voice and data across. It assists in quick decision-making and faster returns in the business one are in. Ideas are communicated and implemented faster using IT which has revolutionized our world! Transformation is inevitable. The Sooner it is, the better it is! SymCloud offers services where information technology is used to its potential. We offer IT services that are relevant to one’s survival in business at an affordable rate while reaping the benefits of the technology.",
+  "jobRequirements": "We are looking for an experienced and results-driven Business Development Manager to spearhead our growth initiatives and establish strategic partnerships for our company. As a Business Development Manager, you will be responsible for identifying new business opportunities, cultivating client relationships, developing market strategies, and leading your team to achieve sales targets. Your role involves creating and executing business plans, conducting market research, negotiating contracts, and effectively communicating our value propositions to potential clients. The ideal candidate should possess strong leadership abilities, exceptional communication skills, and a proven track record in driving business growth and success.",
+}
+Considering above job description here is the applicant resume
+Copy code{
+  "about_me": "Highly skilled and detail-oriented Software Quality Assurance Engineer with extensive experience in ensuring the delivery of high-quality software solutions. Proven ability to develop and execute comprehensive test plans, identify and resolve defects, and improve overall product performance.",
+  "awards_honors": [],
+  "contact_number": "+92 3485304007",
+  "email": "msuleman6556@gmail.com",
+  "hobbies_interest": [],
+  "jobId": "66de2fa5-4d36-45e2-9649-7237872d9f01",
+  "json_certification": [
+    {
+      "name": "BLS Solution"
+    }
+  ],
+  "json_education": [
+    {
+      "degree": "Bachelor in Computer Science (BSCS)",
+      "duration": "Completed in 2022",
+      "school": "Arid Agriculture University"
+    }
+  ],
+  "json_location": {
+    "city": "Rawalpindi",
+    "country": "Pakistan",
+    "state": "Pakistan"
+  },
+  "json_projects": [
+    {
+      "description": [
+        "Financial Services",
+        "Real Estatement",
+        "Project Managment System",
+        "PMS Mobile App",
+        "Mobile Repairing Lab"
+      ],
+      "name": "Accelerec"
+    }
+  ],
+  "languages": [],
+  "name": "Muhammad Suleman",
+  "organizationId": "3be0d84d-fd79-4817-b418-c45aefeb39e8",
+  "other_skills": [
+    "Manual Testing",
+    "Cypress",
+    "Web",
+    "Mobile",
+    "Jira",
+    "JMeter",
+    "Postman",
+    "SDLC",
+    "STLC",
+    "Regression Testing",
+    "Smoke Testing",
+    "Design Test Cases",
+    "Black Box Testing",
+    "Basic Html",
+    "Basic OOP"
+  ],
+  "publications": [],
+  "resume_url": "https://dev-api.3cix.com/resumes/66de2fa5-4d36-45e2-9649-7237872d9f01/1e3f0d5f-acc1-4438-8a11-04664042a505.pdf",
+  "skills": [
+    "Software Quality Assurance",
+    "Automation"
+  ],
+  "social_links": [
+    {
+      "platform": "LinkedIn",
+      "url": "https://www.linkedin.com/in/m-suleman-41774a236/"
+    }
+  ],
+  "tools": [
+    "HTML",
+    "CSS",
+    "Laravel"
+  ],
+  "total_experience": {
+    "month": 11,
+    "year": 1
+  },
+  "uniqueIdentifier": "22c44cca-8075-4cdf-8c69-12030efb0c18",
+  "working_experience": [
+    {
+      "company": "3cix",
+      "duration": {
+        "month": 10,
+        "year": 0
+      },
+      "end_date": "Present",
+      "position": "Junior SQA Manaul/Automation",
+      "responsibilities": [
+        "Contributed significantly to test planning, scenario creation, scripting, and testing procedure design.",
+        "Integrated test automationscripts Expertly utilizedindustry-standard testingtools, including Cypress, JMeter, Postman, and Jira.Collaborated withcross-functional teams toidentify and resolve softwaredefects, ensuring the timelyrelease of high-quality software",
+        "Conducted thorough softwaretesting, including functional,regression, and performancetesting, and documented test results for future reference. Conducted extensive manual testing on web-based and mobilea pplications to ensure exceptional quality and seamless functionality.",
+        "Performed API Testing using Postman to verify the functionality and Load Testing using Jmeter."
+      ],
+      "start_date": "Jun 2023"
+    },
+    {
+      "company": "Excellence Delivered (ExD) Pvt Ltd",
+      "duration": {
+        "month": 11,
+        "year": 0
+      },
+      "end_date": "May 2023",
+      "position": "SQA Engineer",
+      "responsibilities": [
+        "Worked in the development of Html, CSS, and Laravel. Collaborate with developer and senior SQA",
+        "Learned basic UI and Functional Testing."
+      ],
+      "start_date": "Jun 2022"
+    }
+  ]
+}
+You need to provide following output:
+Copy code<p>{
+  "skills": {
+    "compliance_set": ["#####", "#####", "#####", "#####"],
+    "non_compliance_set": ["#####", "#####", "#####", "#####"]
+  },
+  "experience": {
+    "compliance_set": ["#####", "#####", "#####", "#####"],
+    "non_compliance_set": ["#####", "#####", "#####", "#####"]
+  },
+  "qualification": {
+    "compliance_set": ["#####", "#####", "#####", "#####"],
+    "non_compliance_set": ["#####", "#####", "#####", "#####"]
+  }
+}</p>
+Here are detail about above json format
+skills:
+compliance_set: Skills required by job and present in resume you can consider matching skills to like if restapi is required and Django mentioned then it should be considered.
+non_compliance_set: Skill mention in job but not present in resume
+experience:
+compliance_set: All job titles or position of applicant for relevant experience
+non_compliance_set: All job titles or position of applicant for non-relevant experience
+qualification:
+compliance_set: Same or similar qualification of applicant that is required in job
+non_compliance_set: different qualification of applicant that is required in job
+
+Constraints: if similar qualification found then non_compliance_set of qualification should be empty

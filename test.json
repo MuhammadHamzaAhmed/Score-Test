@@ -1,91 +1,111 @@
 {
-  "toolsHandlingExperience": {
-    "TotalScore": 10,
-    "ObtainedScore": 0,
-    "Detail": {
-      "ComplianceSet": [],
-      "NonComplianceSet": [
-        "javascript",
-        "python"
-      ]
+  "about_me": "Highly skilled and detail-oriented Software Quality Assurance Engineer with extensive experience in ensuring the delivery of high-quality software solutions. Proven ability to develop and execute comprehensive test plans, identify and resolve defects, and improve overall product performance.",
+  "awards_honors": [],
+  "contact_number": "+92 3485304007",
+  "email": "msuleman6556@gmail.com",
+  "hobbies_interest": [],
+  "jobId": "66de2fa5-4d36-45e2-9649-7237872d9f01",
+  "json_certification": [
+    {
+      "name": "BLS Solution"
     }
-  },
-  "Location": {
-    "TotalScore": 2,
-    "ObtainedScore": 0,
-    "Detail": {
-      "ComplianceSet": [],
-      "NonComplianceSet": [
-        "pakistan",
-        "islamabad"
-      ]
+  ],
+  "json_education": [
+    {
+      "degree": "Bachelor in Computer Science (BSCS)",
+      "duration": "Completed in 2022",
+      "school": "Arid Agriculture University"
     }
+  ],
+  "json_location": {
+    "city": "Rawalpindi",
+    "country": "Pakistan",
+    "state": "Pakistan"
   },
-  "Experience": {
-    "TotalScore": 10,
-    "ObtainedScore": 1,
-    "Detail": {
-      "Required": "24 months",
-      "Acquired": "23 months"
-    }
-  },
-  "Qualification": {
-    "TotalScore": 14,
-    "ObtainedScore": 13,
-    "Detail": {
-      "ComplianceSet": [
-        "m",
-        "c",
-        "i",
-        "s",
-        "p",
-        "t",
-        "l",
-        "o",
-        "n",
-        "y",
-        "a",
-        "r",
-        "e"
+  "json_projects": [
+    {
+      "description": [
+        "Financial Services",
+        "Real Estatement",
+        "Project Managment System",
+        "PMS Mobile App",
+        "Mobile Repairing Lab"
       ],
-      "NonComplianceSet": [
-        "k"
-      ]
+      "name": "Accelerec"
     }
-  },
-  "Misc": {
-    "TotalScore": 22,
-    "ObtainedScore": 0,
-    "Detail": {
-      "ComplianceSet": [],
-      "NonComplianceSet": [
-        "restful",
-        "modern",
-        "node",
-        "react",
-        "js",
-        "development",
-        "architecture",
-        "css",
-        "projects",
-        "javascript",
-        "stack",
-        "apis",
-        "apisnode",
-        "frontend",
-        "side",
-        "python",
-        "latest",
-        "database",
-        "developer",
-        "web",
-        "system",
-        "backend"
-      ]
+  ],
+  "languages": [],
+  "name": "Muhammad Suleman",
+  "organizationId": "3be0d84d-fd79-4817-b418-c45aefeb39e8",
+  "other_skills": [
+    "Manual Testing",
+    "Cypress",
+    "Web",
+    "Mobile",
+    "Jira",
+    "JMeter",
+    "Postman",
+    "SDLC",
+    "STLC",
+    "Regression Testing",
+    "Smoke Testing",
+    "Design Test Cases",
+    "Black Box Testing",
+    "Basic Html",
+    "Basic OOP"
+  ],
+  "publications": [],
+  "resume_url": "https://dev-api.3cix.com/resumes/66de2fa5-4d36-45e2-9649-7237872d9f01/1e3f0d5f-acc1-4438-8a11-04664042a505.pdf",
+  "skills": [
+    "Software Quality Assurance",
+    "Automation"
+  ],
+  "social_links": [
+    {
+      "platform": "LinkedIn",
+      "url": "https://www.linkedin.com/in/m-suleman-41774a236/"
     }
+  ],
+  "tools": [
+    "HTML",
+    "CSS",
+    "Laravel"
+  ],
+  "total_experience": {
+    "month": 11,
+    "year": 1
   },
-  "uniqueIdentifier": "ef6c8c75-e886-476c-9ff8-e8035c69d5e6",
-  "GrandTotalScore": 58,
-  "GrandObtainedScore": 14,
-  "Score(%)": 24.137931034482758
+  "uniqueIdentifier": "22c44cca-8075-4cdf-8c69-12030efb0c18",
+  "working_experience": [
+    {
+      "company": "3cix",
+      "duration": {
+        "month": 10,
+        "year": 0
+      },
+      "end_date": "Present",
+      "position": "Junior SQA Manaul/Automation",
+      "responsibilities": [
+        "Contributed significantly to test planning, scenario creation, scripting, and testing procedure design.",
+        "Integrated test automationscripts Expertly utilizedindustry-standard testingtools, including Cypress, JMeter, Postman, and Jira.Collaborated withcross-functional teams toidentify and resolve softwaredefects, ensuring the timelyrelease of high-quality software",
+        "Conducted thorough softwaretesting, including functional,regression, and performancetesting, and documented test results for future reference. Conducted extensive manual testing on web-based and mobilea pplications to ensure exceptional quality and seamless functionality.",
+        "Performed API Testing using Postman to verify the functionality and Load Testing using Jmeter."
+      ],
+      "start_date": "Jun 2023"
+    },
+    {
+      "company": "Excellence Delivered (ExD) Pvt Ltd",
+      "duration": {
+        "month": 11,
+        "year": 0
+      },
+      "end_date": "May 2023",
+      "position": "SQA Engineer",
+      "responsibilities": [
+        "Worked in the development of Html, CSS, and Laravel. Collaborate with developer and senior SQA",
+        "Learned basic UI and Functional Testing."
+      ],
+      "start_date": "Jun 2022"
+    }
+  ]
 }
