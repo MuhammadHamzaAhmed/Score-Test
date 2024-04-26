@@ -28,12 +28,12 @@ def calculate_nlp_match_score(resume_doc, job_skills):
     for skill in job_skills:
         skill_token = nlp(skill)
         similarity = max([skill_token.similarity(token) for token in resume_doc if token.has_vector])
-        if similarity > 0.7:  # Set a similarity threshold
+        if similarity > 0.5:  # Set a similarity threshold
             nlp_matched_skills.append(skill)
     # return len(nlp_matched_skills) * nlp_weight/
     return {"total_score": weightage['nlp_keyword_jd_match'], "compliance_set": nlp_matched_skills,
             "non_compliance_set": "",
-            "obtained_score": len(nlp_matched_skills) * weightage['nlp_keyword_jd_match'] / len(job_skills)}
+            "obtained_score": min(4.0, len(nlp_matched_skills) * weightage['nlp_keyword_jd_match'] / len(job_skills))}
 
 
 def hybrid_skill_score_calculation(applicant_data, job_data):
@@ -57,4 +57,6 @@ def hybrid_skill_score_calculation(applicant_data, job_data):
     score = compare_skills_result['obtained_score'] * 80 / compare_skills_result['total_score']
     score += job_skill_score['obtained_score'] * 15 / job_skill_score['total_score']
     score += nlp_match_score['obtained_score'] * 5 / nlp_match_score['total_score']
-    return score * 40 / 100
+
+    return {"total_score": 40, "obtained_score": score * 40 / 100, "job_skill_score": compare_skills_result,
+            "job_description_score": job_skill_score, "other_skill_score": nlp_match_score, }
