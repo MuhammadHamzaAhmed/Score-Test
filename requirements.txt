@@ -31,4 +31,5 @@ tokenizers==0.19.1
 tqdm==4.66.2
 typing_extensions==4.11.0
 urllib3==2.2.1
-spacy
+spacy~=3.7.4
+fuzzywuzzy~=0.18.0

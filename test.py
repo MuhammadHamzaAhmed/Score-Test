@@ -1,11 +1,10 @@
 import json
-from pprint import pprint
 
 import requests
-from fuzzywuzzy import fuzz
 
 from claude import Claude
 from parser import Parser
+from pprint import pprint
 from elastic_search import get_resumes
 
 def send_get_request(url):
@@ -18,29 +17,46 @@ def send_get_request(url):
         print(f"An error occured while getting JD {e}")
 
 
-weightage = {"tools": 40, "country": 6, "city": 4, "qualification": 10, "experience": 40}
+weightage = {"tools": 5, "country": 3, "city": 2, "qualification": 2, "experience": 5}
 
 
-def compare_tools(applicant_tools, jd_tools):
+def compare_tools(applicant_tools, jd_tools, projects, working_experience):
     applicant_tools_set = set([tools.lower() for tools in applicant_tools])
     jd_tools_set = set([tools.lower() for tools in jd_tools])
     same_tools = applicant_tools_set.intersection(jd_tools_set)
     non_compliance_set = list(jd_tools_set - applicant_tools_set)
     compliance_set = list(same_tools)
-    tool_to_remove = []
     if non_compliance_set != []:
         for tool in non_compliance_set:
             for app_tool in applicant_tools:
-                if tool.lower() in app_tool.lower() or fuzz.partial_ratio(tool.lower(), app_tool.lower()) > 75:
-                    tool_to_remove.append(tool)
+                if tool.lower() in app_tool.lower():
+                    non_compliance_set.remove(tool)
                     compliance_set.append(tool)
+    if non_compliance_set != []:
+        for project in projects:
+            for description in project.get("description", []):
+                for skill in non_compliance_set:
+                    if skill in description:
+                        compliance_set.append(skill)
+                        non_compliance_set.remove(skill)
+                if not non_compliance_set == []:
                     break
-    tool_to_remove = list(set(tool_to_remove))
-    for tool in tool_to_remove:
-        non_compliance_set.remove(tool)
-    return {"total_score": weightage['tools'], "compliance_set": compliance_set,
-            "non_compliance_set": non_compliance_set,
-            "obtained_score": len(compliance_set) * weightage['tools'] / len(jd_tools_set)}
+            if not non_compliance_set == []:
+                break
+    if non_compliance_set != []:
+        for experience in working_experience:
+            for description in experience.get("responsibilities", []):
+                for skill in non_compliance_set:
+                    if skill in description:
+                        compliance_set.append(skill)
+                        non_compliance_set.remove(skill)
+                if not non_compliance_set == []:
+                    break
+            if not non_compliance_set == []:
+                break
+    return {"total_score": weightage['tools'], "compliance_set": list(same_tools),
+            "non_compliance_set": list(jd_tools_set - applicant_tools_set),
+            "obtained_score": len(same_tools) * weightage['tools'] / len(jd_tools_set)}
 
 
 def compare_location(applicant_location, city, country):
@@ -114,11 +130,9 @@ def get_scores(job_id, applicant_id):
     job_data = send_get_request(f"https://dev-api.3cix.com/api/external/job-description/job-by-id/{job_id}")
     applicant_data = get_resumes(applicant_id)
     applicant_tools = (
-            applicant_data.get("tools", []) + applicant_data.get("skills", []) + applicant_data.get("other_skills",
-                                                                                                    []) + applicant_data.get(
-        'similar_skills', []))
-    skill_score = compare_tools(applicant_tools, job_data['toolsHandlingExperience'].split(','))  # 40 %
-    skill_score_weightage = skill_score['obtained_score'] * 40 / skill_score["total_score"]
+            applicant_data.get("tools", []) + applicant_data.get("skills", []) + applicant_data.get("other_skills", []))
+    skill_score = compare_tools(applicant_tools, job_data, applicant_data.get('json_projects'),
+                                applicant_data.get('working_experience'))  # 40 %
 
     education = ", ".join([edu.get("degree", "") for edu in applicant_data.get("json_education", [])])
     qualification_score = compare_qualification(education, job_data.get("qualification", ""), claude)
@@ -136,14 +150,14 @@ def get_scores(job_id, applicant_id):
     location_score = compare_location(applicant_data.get('json_location', {}), job_data.get("city")[0],
                                       job_data.get("location", ""))
     location_score_weight = location_score['obtained_score'] * 10 / location_score['total_score']
-    total_score = skill_score_weightage + qualification_score_weight + experience_score[
+    total_score = skill_score['obtained_score'] + qualification_score_weight + experience_score[
         'obtained_score'] + location_score_weight
     return {"percentage": round(total_score, 2), "skill_score": skill_score, "qualification_score": qualification_score,
             "experience_score": experience_score, "location_score": location_score, }
 
 
 if __name__ == "__main__":
-    applicant_ids = ["6e1f289c-5dd5-4487-9da4-712dfd7ae65a"]
+    applicant_ids = ["774d94f7-4312-4454-9c7e-1dc090e52abe"]
     for applicant_id in applicant_ids:
-        score = get_scores("0b47b95b-3004-4b13-a05c-124e2874dd29", applicant_id)
+        score = get_scores("afed150c-05fa-4ce6-ad81-730698c78e1c", applicant_id)
         pprint(score)
