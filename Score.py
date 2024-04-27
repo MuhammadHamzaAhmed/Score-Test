@@ -7,7 +7,12 @@ from fuzzywuzzy import fuzz
 from claude import Claude
 from parser import Parser
 from elastic_search import get_resumes
+import spacy
 
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
+
+nlp = spacy.load("en_core_web_lg")
 def send_get_request(url):
     try:
         header = {"X-Api-Key": "b16ed8c7ea04eaf46f0a"}
@@ -83,7 +88,56 @@ def compare_qualification(application_qualification, jd_qualification, claude):
                 "non_compliance_set": [jd_qualification], "obtained_score": 0}
 
 
+
+def preprocess_text(text):
+    # Tokenize the text and remove stopwords and punctuation
+    doc = nlp(text)
+    tokens = [token.text.lower() for token in doc if not token.is_stop and not token.is_punct]
+    return ' '.join(tokens)
+
+def calculate_similarity(description1, description2):
+    print("---_Reaching Here")
+
+    processed_desc1 = preprocess_text(description1)
+    processed_desc2 = preprocess_text(description2)
+
+    print(processed_desc1)
+    print(processed_desc2)
+
+    # Process the input descriptions
+    doc1 = nlp(processed_desc1)
+    doc2 = nlp(processed_desc2)
+
+    # # Compute similarity between the processed descriptions
+    # similarity_score = doc1.similarity(doc2)
+
+    vectorizer = TfidfVectorizer()
+
+    # Fit and transform the preprocessed descriptions
+    tfidf_matrix = vectorizer.fit_transform([processed_desc1, processed_desc2])
+
+    # Compute cosine similarity between the TF-IDF vectors
+    similarity_score = cosine_similarity(tfidf_matrix[0:1], tfidf_matrix[1:2])[0][0]
+
+    pprint(similarity_score)
+    return similarity_score
+
 def compare_experience(application_experience, jd_experience, title, jd, skills, claude):
+
+    # Making sure that all companies that the applicant has worked on are really relevant
+    for applicant in application_experience:
+        print("----applicant---")
+        print(applicant)
+        print("----Similarity-----")
+        print("----JD----")
+        print(jd)
+        print("---CompanyName---")
+        print(applicant.get("company"))
+        print('-----responsibilities_-----')
+        print(' '.join(applicant.get('responsibilities')))
+        k=calculate_similarity(jd,' '.join(applicant.get('responsibilities','')))
+        print(k)
+
     parser = Parser()
     prompt = f"""
 I need a {title} to list all company names that are suitable for this job. You will disregard all companies that are irrelevant. Please ensure that exact matches are considered; for instance, testing experience cannot be equated with development experience. If all companies are irrelevant, there's no need to list any.
@@ -98,6 +152,12 @@ Constraints: You should include only those companies that have following skills 
     companies = json.loads(parser.get_tags(text)[0])
     experience = 0
     compliance_set, non_compliance_set = [], []
+
+    print("----Company Name gathered from claude----")
+    print(companies)
+
+
+
     for applicant in application_experience:
         if applicant.get("company", "") in companies:
             duration = applicant.get("duration", {})
@@ -114,9 +174,7 @@ def get_scores(job_id, applicant_id):
     job_data = send_get_request(f"https://dev-api.3cix.com/api/external/job-description/job-by-id/{job_id}")
     applicant_data = get_resumes(applicant_id)
     applicant_tools = (
-            applicant_data.get("tools", []) + applicant_data.get("skills", []) + applicant_data.get("other_skills",
-                                                                                                    []) + applicant_data.get(
-        'similar_skills', []))
+            applicant_data.get("tools", []) + applicant_data.get("skills", []) + applicant_data.get("other_skills",[]) + applicant_data.get('similar_skills', []))
     skill_score = compare_tools(applicant_tools, job_data['toolsHandlingExperience'].split(','))  # 40 %
     skill_score_weightage = skill_score['obtained_score'] * 40 / skill_score["total_score"]
 
@@ -143,7 +201,7 @@ def get_scores(job_id, applicant_id):
 
 
 if __name__ == "__main__":
-    applicant_ids = ["6e1f289c-5dd5-4487-9da4-712dfd7ae65a"]
+    applicant_ids = ["26b1211f-bb88-4f7f-a66c-5be2c5f3795d"]
     for applicant_id in applicant_ids:
         score = get_scores("0b47b95b-3004-4b13-a05c-124e2874dd29", applicant_id)
         pprint(score)
