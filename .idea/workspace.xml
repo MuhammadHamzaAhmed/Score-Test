@@ -57,7 +57,7 @@
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.Score">
+  <component name="RunManager" selected="Python.test">
     <configuration name="Score" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="pythonProject" />
       <option name="ENV_FILES" value="" />
@@ -106,8 +106,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.Score" />
         <item itemvalue="Python.test" />
+        <item itemvalue="Python.Score" />
       </list>
     </recent_temporary>
   </component>
